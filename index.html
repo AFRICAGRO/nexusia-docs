@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NexusIA — Centre de documentation API</title>
+  <link rel="icon" href="data:," />
+  <style>
+    body { margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+    header { background:#0b1220; color:#fff; padding:18px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    header h1 { margin:0; font-size:18px; letter-spacing:0.3px; }
+    header nav a { color:#cfe3ff; margin-left:16px; text-decoration:none; font-size:14px; }
+    .hero { padding:28px 24px; background:linear-gradient(90deg,#0f1724 0%,#0b1220 100%); color:#fff; }
+    .hero .intro { max-width:980px; }
+    .meta { margin-top:12px; color:#d1d7e3; font-size:14px; }
+    .container { padding:18px 24px; }
+    .features { display:flex; gap:16px; flex-wrap:wrap; margin-top:12px; }
+    .card { background:#fff; border-radius:8px; padding:14px; box-shadow:0 2px 8px rgba(8,10,15,0.06); flex:1 1 220px; min-width:220px; }
+    footer { padding:14px 24px; font-size:13px; color:#666; border-top:1px solid #eee; }
+    /* full-height Redoc container */
+    #redoc-container { height:75vh; min-height:600px; border:1px solid #e6e9ef; border-radius:8px; overflow:hidden; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NexusIA API — Centre de documentation</h1>
+    <nav>
+      <a href="#overview">Aperçu</a>
+      <a href="#spec">Spécification (OpenAPI)</a>
+      <a href="#examples">Exemples</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="overview">
+    <div class="intro">
+      <h2 style="margin:0 0 6px 0;">Documentation de l'API</h2>
+      <p class="meta">Accédez à la spécification OpenAPI, exemples d'appel, codes d'erreur et guides d'authentification pour intégrer NexusIA.</p>
+      <div class="features">
+        <div class="card">
+          <strong>Accès interactif</strong>
+          <div style="margin-top:8px; color:#555;">Tester directement les endpoints via l'interface Redoc/Swagger.</div>
+        </div>
+        <div class="card">
+          <strong>Authentification</strong>
+          <div style="margin-top:8px; color:#555;">OAuth2 / API keys / Bearer tokens — exemples fournis.</div>
+        </div>
+        <div class="card">
+          <strong>SDKs & Exemples</strong>
+          <div style="margin-top:8px; color:#555;">Snippets en curl, Python, JavaScript.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <h3 id="spec">Spécification OpenAPI</h3>
+    <p>La documentation ci-dessous charge la spécification OpenAPI. Modifiez l'URL openapiSpec pour pointer vers votre fichier YAML/JSON.</p>
+
+    <!-- Redoc inject -->
+    <div id="redoc-container"></div>
+
+    <h3 id="examples" style="margin-top:20px;">Exemples rapides</h3>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="card">
+        <pre style="white-space:pre-wrap; margin:0;"><code>// Curl: obtenir un token (exemple)
+curl -X POST "https://api.example.com/oauth/token" \
+  -H "Content-Type: application/json" \
+  -d '{"client_id":"YOUR_ID","client_secret":"YOUR_SECRET","grant_type":"client_credentials"}'
+</code></pre>
+      </div>
+      <div class="card">
+        <pre style="white-space:pre-wrap; margin:0;"><code>// JS: appel endpoint
+fetch("https://api.example.com/v1/predict", {
+  method:"POST",
+  headers:{ "Authorization":"Bearer YOUR_TOKEN","Content-Type":"application/json" },
+  body: JSON.stringify({ prompt: "Bonjour" })
+}).then(r=>r.json()).then(console.log)
+</code></pre>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Version API: 1.0 — Pour assistance : contact@example.com
+  </footer>
+
+  <!-- Redoc standalone bundle (CDN) -->
+  <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+  <script>
+    // Remplacez par le chemin réel de votre OpenAPI spec (YAML ou JSON)
+    const openapiSpec = "/chemin/vers/openapi.yaml";
+    // Initialisation Redoc
+    Redoc.init(openapiSpec, {
+      hideDownloadButton: false,
+      theme: { colors: { primary: { main: "#0b1220" } } }
+    }, document.getElementById('redoc-container'));
+  </script>
+</body>
+</html>
