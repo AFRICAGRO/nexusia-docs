@@ -1,0 +1,51 @@
+openapi: 3.0.3
+info:
+  title: NexusIA Docs
+  version: 1.0.0
+  description: Documentation API de NexusIA pour l'intégration des services et outils.
+servers:
+  - url: https://api.example.com
+    description: Serveur principal
+paths:
+  /v1/health:
+    get:
+      summary: Vérifie l'état du service
+      responses:
+        '200':
+          description: Service disponible
+          content:
+            application/json:
+              example:
+                status: ok
+                service: nexusia
+  /v1/predict:
+    post:
+      summary: Exécute une prédiction ou un traitement IA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - prompt
+              properties:
+                prompt:
+                  type: string
+                  example: Bonjour, peux-tu résumer ce texte ?
+      responses:
+        '200':
+          description: Résultat généré
+          content:
+            application/json:
+              example:
+                success: true
+                output: "Voici un résumé utile."
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
